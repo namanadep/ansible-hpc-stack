@@ -1,0 +1,30 @@
+---
+# ── Central configuration for the whole HPC software stack ─────────────────────
+# Change a version or package here and every node re-provisions to match.
+# This single-source-of-truth is what keeps a cluster's nodes identical.
+
+# Compiler toolchain
+compiler_packages:
+  - build-essential      # gcc, g++, make
+  - gfortran             # Fortran — still everywhere in scientific code
+  - cmake
+  - autoconf
+  - automake
+  - pkg-config
+
+# OpenMPI — the message-passing library for multi-node jobs
+openmpi_packages:
+  - openmpi-bin
+  - libopenmpi-dev
+openmpi_prefix: /usr        # apt installs OpenMPI under /usr
+
+# Scientific numerical libraries
+scientific_lib_packages:
+  - libblas-dev            # Basic Linear Algebra Subprograms
+  - liblapack-dev          # Linear Algebra PACKage
+  - libfftw3-dev           # Fastest Fourier Transform in the West
+  - libhdf5-dev            # Hierarchical Data Format (parallel I/O)
+  - libscalapack-openmpi-dev
+
+# Lmod environment modules
+modulefiles_dir: /opt/modulefiles

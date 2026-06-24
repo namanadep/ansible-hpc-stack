@@ -1,0 +1,23 @@
+-- {{ ansible_managed }}
+-- OpenMPI environment module — rendered by Ansible from a Jinja2 template.
+-- Users load it with:  module load openmpi
+
+help([[
+OpenMPI {{ openmpi_version }} — Message Passing Interface for HPC.
+Puts the MPI compiler wrappers (mpicc, mpif90) and runtime (mpirun)
+on your PATH, and exports MPI_HOME.
+]])
+
+whatis("Name        : OpenMPI")
+whatis("Version     : {{ openmpi_version }}")
+whatis("Description : Open Source Message Passing Interface")
+whatis("Managed by  : Ansible (ansible-hpc-stack)")
+
+local mpi_root = "{{ openmpi_prefix }}"
+
+prepend_path("PATH",            pathJoin(mpi_root, "bin"))
+prepend_path("LD_LIBRARY_PATH", pathJoin(mpi_root, "lib"))
+prepend_path("MANPATH",         pathJoin(mpi_root, "share/man"))
+
+setenv("MPI_HOME", mpi_root)
+setenv("MPI_RUN",  pathJoin(mpi_root, "bin", "mpirun"))

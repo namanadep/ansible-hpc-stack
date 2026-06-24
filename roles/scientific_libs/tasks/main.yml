@@ -1,0 +1,22 @@
+---
+# Scientific numerical libraries that almost every HPC application links against:
+# BLAS/LAPACK (linear algebra), FFTW (Fourier transforms), HDF5 (parallel I/O),
+# ScaLAPACK (distributed linear algebra).
+
+- name: Install scientific numerical libraries
+  ansible.builtin.apt:
+    name: "{{ scientific_lib_packages }}"
+    state: present
+
+- name: Confirm key libraries are present
+  ansible.builtin.shell: |
+    set -o pipefail
+    ldconfig -p | grep -E 'libblas|liblapack|libfftw3|libhdf5' | wc -l
+  args:
+    executable: /bin/bash
+  register: lib_count
+  changed_when: false
+
+- name: Report library count
+  ansible.builtin.debug:
+    msg: "{{ lib_count.stdout }} scientific library entries registered on {{ inventory_hostname }}"

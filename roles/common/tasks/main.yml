@@ -1,0 +1,30 @@
+---
+# Base setup every node needs before any HPC software goes on.
+
+- name: Update apt package cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install base utilities
+  ansible.builtin.apt:
+    name:
+      - curl
+      - vim
+      - less
+      - net-tools
+      - locales
+      - bash-completion
+    state: present
+
+- name: Ensure en_US.UTF-8 locale is generated
+  community.general.locale_gen:
+    name: en_US.UTF-8
+    state: present
+  ignore_errors: true   # locale-gen not critical to the stack
+
+- name: Create shared apps directory for modulefiles
+  ansible.builtin.file:
+    path: "{{ modulefiles_dir }}"
+    state: directory
+    mode: "0755"

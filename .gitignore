@@ -1,0 +1,4 @@
+# SSH keys are generated locally by scripts/setup_nodes.sh — never commit them
+keys/id_hpc
+keys/id_hpc.pub
+docker/id_hpc.pub

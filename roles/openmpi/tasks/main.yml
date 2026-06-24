@@ -1,0 +1,17 @@
+---
+# OpenMPI — the Message Passing Interface implementation used to run jobs
+# across multiple nodes.
+
+- name: Install OpenMPI
+  ansible.builtin.apt:
+    name: "{{ openmpi_packages }}"
+    state: present
+
+- name: Verify mpicc is available
+  ansible.builtin.command: mpicc --showme:version
+  register: mpicc_check
+  changed_when: false
+
+- name: Report OpenMPI version
+  ansible.builtin.debug:
+    msg: "{{ mpicc_check.stdout_lines[0] }}"

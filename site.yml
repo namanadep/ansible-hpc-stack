@@ -1,0 +1,27 @@
+---
+# ============================================================================
+#  HPC Software Stack Provisioning
+#  Turns bare compute nodes into job-ready HPC nodes — identically, every time.
+#
+#  Run:  ansible-playbook site.yml
+# ============================================================================
+- name: Provision HPC software stack on all compute nodes
+  hosts: compute_nodes
+  become: true
+  gather_facts: true
+
+  roles:
+    - common           # base utilities + locale + apps dir
+    - compilers        # GCC, G++, gfortran, CMake
+    - openmpi          # OpenMPI (MPI runtime + compiler wrappers)
+    - scientific_libs  # BLAS, LAPACK, FFTW, HDF5, ScaLAPACK
+    - lmod             # Lmod environment modules + templated modulefiles
+
+  post_tasks:
+    - name: Stack summary
+      ansible.builtin.debug:
+        msg: >-
+          {{ inventory_hostname }} provisioned:
+          GCC {{ gcc_version.stdout | default('?') }},
+          OpenMPI {{ openmpi_version | default('?') }},
+          modulefiles in {{ modulefiles_dir }}

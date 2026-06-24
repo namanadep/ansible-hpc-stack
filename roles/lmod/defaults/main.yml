@@ -1,0 +1,6 @@
+---
+# Modulefiles this role renders from Jinja2 templates and deploys to every node.
+# Add an entry here and it appears under `module avail` cluster-wide.
+modules_to_deploy:
+  - name: openmpi
+    template: openmpi.lua.j2

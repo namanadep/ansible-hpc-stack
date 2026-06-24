@@ -1,0 +1,16 @@
+---
+# Compiler toolchain — GCC, G++, gfortran, and build tools.
+
+- name: Install compiler toolchain
+  ansible.builtin.apt:
+    name: "{{ compiler_packages }}"
+    state: present
+
+- name: Gather installed GCC version
+  ansible.builtin.command: gcc -dumpfullversion
+  register: gcc_version
+  changed_when: false
+
+- name: Report GCC version
+  ansible.builtin.debug:
+    msg: "GCC {{ gcc_version.stdout }} installed on {{ inventory_hostname }}"

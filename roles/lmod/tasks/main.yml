@@ -1,0 +1,45 @@
+---
+# Lmod — the environment-modules system that lets users swap software
+# versions with `module load` / `module unload`.
+
+- name: Install Lmod
+  ansible.builtin.apt:
+    name: lmod
+    state: present
+
+- name: Ensure modulefiles directory exists
+  ansible.builtin.file:
+    path: "{{ modulefiles_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Detect installed OpenMPI version
+  ansible.builtin.shell: |
+    set -o pipefail
+    mpirun --version | head -n1 | awk '{print $NF}'
+  args:
+    executable: /bin/bash
+  register: ompi_version_raw
+  changed_when: false
+
+- name: Register OpenMPI version fact
+  ansible.builtin.set_fact:
+    openmpi_version: "{{ ompi_version_raw.stdout }}"
+
+- name: Render and deploy modulefiles from Jinja2 templates
+  ansible.builtin.template:
+    src: "{{ item.template }}"
+    dest: "{{ modulefiles_dir }}/{{ item.name }}.lua"
+    mode: "0644"
+  loop: "{{ modules_to_deploy }}"
+
+- name: Add modulefiles dir to the system MODULEPATH
+  ansible.builtin.copy:
+    dest: /etc/profile.d/z01_hpc_modulepath.sh
+    mode: "0644"
+    content: |
+      # Managed by Ansible (ansible-hpc-stack)
+      # Make the cluster's custom modulefiles visible to Lmod.
+      if [ -d "{{ modulefiles_dir }}" ]; then
+          module use "{{ modulefiles_dir }}"
+      fi
