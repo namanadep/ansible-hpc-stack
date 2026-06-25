@@ -6,13 +6,13 @@
 # Compiler toolchain
 compiler_packages:
   - build-essential      # gcc, g++, make
-  - gfortran             # Fortran — still everywhere in scientific code
+  - gfortran             # Fortran - still everywhere in scientific code
   - cmake
   - autoconf
   - automake
   - pkg-config
 
-# OpenMPI — the message-passing library for multi-node jobs
+# OpenMPI - the message-passing library for multi-node jobs
 openmpi_packages:
   - openmpi-bin
   - libopenmpi-dev

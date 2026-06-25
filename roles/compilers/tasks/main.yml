@@ -1,5 +1,5 @@
 ---
-# Compiler toolchain — GCC, G++, gfortran, and build tools.
+# Compiler toolchain - GCC, G++, gfortran, and build tools.
 
 - name: Install compiler toolchain
   ansible.builtin.apt:

@@ -1,7 +1,7 @@
 ---
 # ============================================================================
 #  HPC Software Stack Provisioning
-#  Turns bare compute nodes into job-ready HPC nodes — identically, every time.
+#  Turns bare compute nodes into job-ready HPC nodes - identically, every time.
 #
 #  Run:  ansible-playbook site.yml
 # ============================================================================

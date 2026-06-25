@@ -1,5 +1,5 @@
 ---
-# OpenMPI — the Message Passing Interface implementation used to run jobs
+# OpenMPI - the Message Passing Interface implementation used to run jobs
 # across multiple nodes.
 
 - name: Install OpenMPI

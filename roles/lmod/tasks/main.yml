@@ -1,5 +1,5 @@
 ---
-# Lmod — the environment-modules system that lets users swap software
+# Lmod - the environment-modules system that lets users swap software
 # versions with `module load` / `module unload`.
 
 - name: Install Lmod
