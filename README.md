@@ -16,21 +16,6 @@ A fresh node has nothing. This project installs everything a compute node needs 
 
 ## Architecture
 
-```
-   ┌────────────────────────┐         Ansible (SSH + Python)
-   │   Ansible control node │ ───────────────┬───────────────┐
-   │   (this WSL machine)   │                │               │
-   └────────────────────────┘                │               │
-                │                             ▼               ▼
-                ▼                       ┌──────────┐    ┌──────────┐
-          ┌──────────┐                 │  node2   │    │  node3   │
-          │  node1   │                 │  (bare → │    │  (bare → │
-          │  (bare → │                 │ provisi- │    │ provisi- │
-          │ provisi- │                 │  oned)   │    │  oned)   │
-          │  oned)   │                 └──────────┘    └──────────┘
-          └──────────┘
-```
-
 The three compute nodes are Docker containers (bare Ubuntu 24.04 + SSH + Python — nothing else). Ansible connects over SSH and installs the entire stack. This is the standard way to develop and test Ansible against a multi-node "cluster" before running it on real hardware; **the playbook is identical whether the targets are containers or 1,000 bare-metal nodes** — only the inventory changes.
 
 ## Repository structure
@@ -75,7 +60,7 @@ ansible-playbook site.yml
 ansible-playbook site.yml
 ```
 
-## Proof of work
+## Procedure
 
 All screenshots below were captured on a real run on this machine.
 
