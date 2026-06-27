@@ -2,7 +2,7 @@
 
 [![Watch the demo](https://img.shields.io/badge/YouTube-Watch%20Demo-red?logo=youtube)](https://youtu.be/m_AZQ0V4rck)
 
-[![Demo video](https://img.youtube.com/vi/m_AZQ0V4rck/maxresdefault.jpg)](https://youtu.be/m_AZQ0V4rck)
+[![Demo video](https://img.youtube.com/vi/m_AZQ0V4rck/maxresdefault.jpg?v=2)](https://youtu.be/m_AZQ0V4rck)
 
 Automated provisioning of a complete HPC software stack across compute nodes with **Ansible** - turning bare machines into job-ready HPC nodes, identically and repeatably.
 
