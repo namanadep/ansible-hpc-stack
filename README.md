@@ -2,6 +2,8 @@
 
 [![Watch the demo](https://img.shields.io/badge/YouTube-Watch%20Demo-red?logo=youtube)](https://youtu.be/m_AZQ0V4rck)
 
+[![Demo video](https://img.youtube.com/vi/m_AZQ0V4rck/maxresdefault.jpg)](https://youtu.be/m_AZQ0V4rck)
+
 Automated provisioning of a complete HPC software stack across compute nodes with **Ansible** - turning bare machines into job-ready HPC nodes, identically and repeatably.
 
 A fresh node has nothing. This project installs everything a compute node needs to run jobs - compilers, OpenMPI, scientific libraries, and the Lmod environment-modules system - on **every node at once**, from a single source of truth. Run it twice and the second run changes nothing (idempotent), which is the whole point of configuration management: every node in the cluster stays provably identical.
